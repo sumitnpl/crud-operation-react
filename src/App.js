@@ -14,23 +14,30 @@ function App() {
   setData(EmployeeDatas)
 },[])
 
-const handleSave= ((e)=>{
-  if (age > 0){
-    if(firstName !=''){
-      if(lastName !=''){
-        const dt =[...data];
+const handleSave = (e) => {
+  if (age > 0) {
+    if (firstName !== '') {
+      if (lastName !== '') {
+        const dt = [...data];
+        const maxId = dt.length > 0 ? Math.max(...dt.map((item) => item.id)) : 0;
         const newObject = {
-          id: Math.max(...data.map((item) => item.id)) + 1,
+          id: maxId + 1,
           firstName: firstName,
           lastName: lastName,
-          age : age
-        }
+          age: age
+        };
         dt.push(newObject);
         setData(dt);
-      }else{ alert('Last Name is Empty')}
-    }else{ alert('First Name is Empty')}
-  }else{ alert('Age is not Valid')}
-});
+      } else {
+        alert('Last Name is Empty');
+      }
+    } else {
+      alert('First Name is Empty');
+    }
+  } else {
+    alert('Age is not Valid');
+  }
+};
 
 const handleUpdate= (()=>{
   if (age > 0){
@@ -94,12 +101,12 @@ const handleDelete= (id)=>{
       </div>
       {
         !isUpdate ?
-        <button className="btn btn-primary" style={{width:'90px'}} onClick={(e)=>handleSave(e)} >Save</button> 
+        <button className="btn btn-primary" style={{width:'90px', height:'55px' }} onClick={(e)=>handleSave(e)} >Save</button> 
         :
-        <button className="btn btn-primary" style={{width:'90px'}} onClick={()=>handleUpdate()} >Update</button> 
+        <button className="btn btn-primary" style={{width:'90px', height:'55px'}} onClick={()=>handleUpdate()} >Update</button> 
 
       }&nbsp;
-      <button className="btn btn-danger" style={{width:'90px'}} onClick={()=>handleClear()} >Clear</button>
+      <button className="btn btn-danger" style={{width:'90px', height:'55px'}} onClick={()=>handleClear()} >Clear</button>
     </div>
      <table className="text-center table table-hover table-dark" >
       <thead>
